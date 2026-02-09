@@ -110,11 +110,15 @@
 /* 右侧图表区域 */
 .fund-card-chart {
   flex: 1;
-  min-height: 100px;
+  min-height: 80px;
   background: var(--bg-base);
   border-radius: var(--radius-inner);
-  box-shadow: var(--shadow-inset);
-  padding: var(--space-xs);
+  box-shadow: var(--shadow-inset-small);
+  padding: var(--space-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
 /* Group Container */

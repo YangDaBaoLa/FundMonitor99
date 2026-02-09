@@ -10,8 +10,9 @@ import { Trash } from '@phosphor-icons/react';
 import { AnimatedCurrency, AnimatedPercent, AnimatedNav } from '../common/AnimatedNumber';
 import { formatNav, getChangeColor } from '../../utils/format';
 import { calculateDailyProfit } from '../../utils/trading';
+import IntradaySparkline from './IntradaySparkline';
 
-function FundCard({ fund, realtime, onNameClick, onDelete }) {
+function FundCard({ fund, realtime, intradayData, onNameClick, onDelete }) {
   const [isHovered, setIsHovered] = useState(false);
   
   const {
@@ -159,6 +160,15 @@ function FundCard({ fund, realtime, onNameClick, onDelete }) {
               )}
             </span>
           </div>
+        </div>
+
+        {/* 日内走势图 */}
+        <div className="fund-card-chart">
+          <IntradaySparkline 
+            data={intradayData || []} 
+            width={140} 
+            height={70} 
+          />
         </div>
       </div>
     </motion.div>

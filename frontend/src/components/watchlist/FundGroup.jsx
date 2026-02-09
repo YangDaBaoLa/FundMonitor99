@@ -14,7 +14,8 @@ import { getTradingStatus } from '../../utils/trading';
 function FundGroup({ 
   group, 
   funds, 
-  realtimeData, 
+  realtimeData,
+  intradayData,
   groupProfit,
   onFundNameClick,
   onDeleteFund,
@@ -140,6 +141,7 @@ function FundGroup({
                   key={fund.id}
                   fund={fund}
                   realtime={realtimeData[fund.code]}
+                  intradayData={intradayData?.[fund.code]}
                   onNameClick={onFundNameClick}
                   onDelete={onDeleteFund}
                 />

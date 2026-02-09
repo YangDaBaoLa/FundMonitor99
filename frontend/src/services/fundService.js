@@ -212,4 +212,33 @@ export async function updateSetting(key, value) {
   return api.patch('/userdata/settings', { key, value });
 }
 
+// ==================== 日内涨跌幅 API ====================
+
+/**
+ * 保存日内涨跌幅数据
+ * @param {Object} changes - {code: change, ...}
+ * @returns {Promise<{success: boolean}>}
+ */
+export async function saveIntradayChanges(changes) {
+  return api.post('/intraday/save', { changes });
+}
+
+/**
+ * 获取单只基金的日内涨跌幅数据
+ * @param {string} code - 基金代码
+ * @returns {Promise<Array<{time: string, change: number}>>}
+ */
+export async function getIntradayData(code) {
+  return api.get(`/intraday/${code}`);
+}
+
+/**
+ * 批量获取多只基金的日内涨跌幅数据
+ * @param {string[]} codes - 基金代码列表
+ * @returns {Promise<{data: Object}>}
+ */
+export async function getIntradayDataBatch(codes) {
+  return api.post('/intraday/batch', { codes });
+}
+
 export default api;

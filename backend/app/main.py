@@ -15,7 +15,7 @@ from fastapi.responses import FileResponse
 from contextlib import asynccontextmanager
 
 from app.config import settings
-from app.api import funds, health, userdata
+from app.api import funds, health, userdata, intraday
 
 
 def get_static_dir():
@@ -74,6 +74,7 @@ app.add_middleware(
 app.include_router(health.router, tags=["Health"])
 app.include_router(funds.router, prefix="/api", tags=["Funds"])
 app.include_router(userdata.router, prefix="/api", tags=["UserData"])
+app.include_router(intraday.router, prefix="/api", tags=["Intraday"])
 
 # 静态文件服务（仅在打包后生效）
 static_dir = get_static_dir()

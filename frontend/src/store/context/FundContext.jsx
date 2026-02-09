@@ -3,7 +3,7 @@
  * 管理全局基金实时数据状态
  */
 import { createContext, useContext, useState, useCallback, useMemo, useEffect } from 'react';
-import { getFundsRealtimeBatch, getSettings, updateSetting } from '../../services/fundService';
+import { getFundsRealtimeBatch, getSettings, updateSetting, saveIntradayChanges, getIntradayDataBatch } from '../../services/fundService';
 import { usePolling } from '../../hooks/usePolling';
 import { useWatchlist } from '../../hooks/useWatchlist';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
@@ -21,6 +21,7 @@ function getLocalDateString(date = new Date()) {
 
 export function FundProvider({ children }) {
   const [realtimeData, setRealtimeData] = useState({});
+  const [intradayData, setIntradayData] = useState({});  // 日内涨跌幅数据
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [lastUpdateTime, setLastUpdateTime] = useState(null);
@@ -101,10 +102,11 @@ export function FundProvider({ children }) {
 
     const today = getLocalDateString();
 
-    // 检查日期是否变化，如果变化则清除实时数据缓存
+    // 检查日期是否变化，如果变化则清除实时数据缓存和日内数据
     if (lastUpdateDate && lastUpdateDate !== today) {
       console.log('日期变化，清除实时数据缓存');
       setRealtimeData({});
+      setIntradayData({});
     }
 
     setLoading(true);
@@ -115,13 +117,35 @@ export function FundProvider({ children }) {
       
       // 转换为 Map 结构
       const dataMap = {};
+      const changes = {};
+      
       response.funds.forEach((fund) => {
         dataMap[fund.code] = fund;
+        // 收集涨跌幅数据
+        if (fund.estimate_change !== null && fund.estimate_change !== undefined) {
+          changes[fund.code] = fund.estimate_change;
+        }
       });
 
       setRealtimeData(dataMap);
       setLastUpdateTime(response.update_time);
       setLastUpdateDate(today);
+
+      // 保存日内涨跌幅数据到后端（后台执行，不阻塞）
+      if (Object.keys(changes).length > 0) {
+        saveIntradayChanges(changes).catch(err => {
+          console.error('Failed to save intraday changes:', err);
+        });
+      }
+
+      // 获取最新的日内数据
+      try {
+        const intradayResponse = await getIntradayDataBatch(getAllCodes);
+        setIntradayData(intradayResponse.data || {});
+      } catch (err) {
+        console.error('Failed to fetch intraday data:', err);
+      }
+
     } catch (err) {
       console.error('Failed to fetch realtime data:', err);
       setError(err.message || '获取实时数据失败');
@@ -193,6 +217,7 @@ export function FundProvider({ children }) {
     watchlist,
     groups,
     realtimeData,
+    intradayData,
     loading,
     error,
     lastUpdateTime,

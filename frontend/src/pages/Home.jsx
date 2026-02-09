@@ -24,6 +24,7 @@ function Home() {
     watchlist,
     groups,
     realtimeData,
+    intradayData,
     totalProfit,
     isPolling,
     countdown,
@@ -236,6 +237,7 @@ function Home() {
                   group={group}
                   funds={groupFunds}
                   realtimeData={realtimeData}
+                  intradayData={intradayData}
                   groupProfit={groupProfit}
                   onFundNameClick={handleFundNameClick}
                   onDeleteFund={handleDeleteFund}
