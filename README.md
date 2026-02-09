@@ -1,4 +1,5 @@
 MacOS开启终端，通过cd 指令进入文件夹，然后使用./start.sh运行，运行后将端口链接复制到浏览器打开
+
 Windows依次双击install.bat→start.bat， 如果想停止双击stop.bat即可
 
 如有问题可以把项目复制给豆老师让他帮你生成操作方法
