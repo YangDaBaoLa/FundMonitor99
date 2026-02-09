@@ -1,0 +1,9 @@
+{
+  "hideAmount": false,
+  "refreshInterval": 5000,
+  "appName": "大宝养鸡",
+  "avatar": {
+    "type": "preset",
+    "value": "2"
+  }
+}

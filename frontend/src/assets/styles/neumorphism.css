@@ -1,0 +1,436 @@
+/*
+ * Fund Monitor - Neumorphism Design System
+ * 新拟态设计系统
+ */
+
+/* ===== CSS Variables ===== */
+:root {
+  /* Colors */
+  --bg-base: #E0E5EC;
+  --fg-primary: #3D4852;
+  --fg-muted: #6B7280;
+  --accent: #6C63FF;
+  --accent-light: #8B84FF;
+  --accent-secondary: #38B2AC;
+  
+  /* 涨跌颜色（红涨绿跌） */
+  --color-up: #E53E3E;
+  --color-down: #38A169;
+  --color-up-bg: rgba(229, 62, 62, 0.1);
+  --color-down-bg: rgba(56, 161, 105, 0.1);
+  
+  /* Shadows */
+  --shadow-light: rgba(255, 255, 255, 0.5);
+  --shadow-light-hover: rgba(255, 255, 255, 0.6);
+  --shadow-dark: rgb(163, 177, 198, 0.6);
+  --shadow-dark-hover: rgb(163, 177, 198, 0.7);
+  
+  /* Shadow Presets */
+  --shadow-extruded: 9px 9px 16px rgb(163, 177, 198, 0.6), 
+                     -9px -9px 16px rgba(255, 255, 255, 0.5);
+  --shadow-extruded-hover: 12px 12px 20px rgb(163, 177, 198, 0.7), 
+                           -12px -12px 20px rgba(255, 255, 255, 0.6);
+  --shadow-extruded-small: 5px 5px 10px rgb(163, 177, 198, 0.6), 
+                           -5px -5px 10px rgba(255, 255, 255, 0.5);
+  --shadow-inset: inset 6px 6px 10px rgb(163, 177, 198, 0.6), 
+                  inset -6px -6px 10px rgba(255, 255, 255, 0.5);
+  --shadow-inset-deep: inset 10px 10px 20px rgb(163, 177, 198, 0.7), 
+                       inset -10px -10px 20px rgba(255, 255, 255, 0.6);
+  --shadow-inset-small: inset 3px 3px 6px rgb(163, 177, 198, 0.6), 
+                        inset -3px -3px 6px rgba(255, 255, 255, 0.5);
+  
+  /* Radius */
+  --radius-container: 32px;
+  --radius-button: 16px;
+  --radius-inner: 12px;
+  --radius-full: 9999px;
+  
+  /* Typography */
+  --font-display: 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  
+  /* Transitions */
+  --transition-fast: 150ms ease-out;
+  --transition-normal: 300ms ease-out;
+  --transition-slow: 500ms ease-out;
+  
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+}
+
+/* ===== Global Styles ===== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-base);
+  color: var(--fg-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== Typography ===== */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--fg-primary);
+}
+
+h1 { font-size: 2.5rem; font-weight: 800; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+h5 { font-size: 1rem; }
+h6 { font-size: 0.875rem; }
+
+.text-muted {
+  color: var(--fg-muted);
+}
+
+.text-accent {
+  color: var(--accent);
+}
+
+.text-up {
+  color: var(--color-up);
+}
+
+.text-down {
+  color: var(--color-down);
+}
+
+/* ===== Neumorphism Components ===== */
+
+/* Card - Extruded */
+.neu-card {
+  background: var(--bg-base);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-extruded);
+  padding: var(--space-lg);
+  transition: all var(--transition-normal);
+}
+
+.neu-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-extruded-hover);
+}
+
+/* Card - Small */
+.neu-card-sm {
+  background: var(--bg-base);
+  border-radius: var(--radius-button);
+  box-shadow: var(--shadow-extruded-small);
+  padding: var(--space-md);
+  transition: all var(--transition-normal);
+}
+
+.neu-card-sm:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-extruded);
+}
+
+/* Inset Container */
+.neu-inset {
+  background: var(--bg-base);
+  border-radius: var(--radius-button);
+  box-shadow: var(--shadow-inset);
+  padding: var(--space-md);
+}
+
+.neu-inset-deep {
+  background: var(--bg-base);
+  border-radius: var(--radius-button);
+  box-shadow: var(--shadow-inset-deep);
+  padding: var(--space-md);
+}
+
+/* Button - Primary */
+.neu-btn {
+  background: var(--bg-base);
+  border: none;
+  border-radius: var(--radius-button);
+  box-shadow: var(--shadow-extruded-small);
+  padding: var(--space-sm) var(--space-lg);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--fg-primary);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  outline: none;
+}
+
+.neu-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-extruded);
+}
+
+.neu-btn:active {
+  transform: translateY(0.5px);
+  box-shadow: var(--shadow-inset-small);
+}
+
+.neu-btn:focus-visible {
+  box-shadow: var(--shadow-extruded-small), 0 0 0 2px var(--accent);
+}
+
+/* Button - Primary Accent */
+.neu-btn-primary {
+  background: var(--accent);
+  color: white;
+  box-shadow: 5px 5px 10px rgb(163, 177, 198, 0.6), 
+              -5px -5px 10px rgba(255, 255, 255, 0.5);
+}
+
+.neu-btn-primary:hover {
+  background: var(--accent-light);
+}
+
+.neu-btn-primary:active {
+  box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.2), 
+              inset -3px -3px 6px rgba(255, 255, 255, 0.1);
+}
+
+/* Input */
+.neu-input {
+  background: var(--bg-base);
+  border: none;
+  border-radius: var(--radius-button);
+  box-shadow: var(--shadow-inset);
+  padding: var(--space-sm) var(--space-md);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--fg-primary);
+  width: 100%;
+  transition: all var(--transition-normal);
+  outline: none;
+}
+
+.neu-input::placeholder {
+  color: #A0AEC0;
+}
+
+.neu-input:focus {
+  box-shadow: var(--shadow-inset-deep), 0 0 0 2px var(--accent);
+}
+
+/* Tag / Badge */
+.neu-tag {
+  display: inline-flex;
+  align-items: center;
+  background: var(--bg-base);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-inset-small);
+  padding: var(--space-xs) var(--space-sm);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--fg-muted);
+}
+
+/* Small Tag - 用于基金代码旁边的板块标签 */
+.neu-tag-sm {
+  display: inline-flex;
+  align-items: center;
+  background: var(--accent);
+  border-radius: var(--radius-full);
+  padding: 2px 8px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: white;
+  white-space: nowrap;
+}
+
+/* Icon Container */
+.neu-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-base);
+  border-radius: var(--radius-inner);
+  box-shadow: var(--shadow-inset-deep);
+  width: 48px;
+  height: 48px;
+}
+
+/* ===== Utility Classes ===== */
+
+/* Flex */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; }
+.items-center { align-items: center; }
+.items-start { align-items: flex-start; }
+.items-end { align-items: flex-end; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.justify-end { justify-content: flex-end; }
+.gap-xs { gap: var(--space-xs); }
+.gap-sm { gap: var(--space-sm); }
+.gap-md { gap: var(--space-md); }
+.gap-lg { gap: var(--space-lg); }
+.gap-xl { gap: var(--space-xl); }
+
+/* Grid */
+.grid { display: grid; }
+.grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+/* Spacing */
+.p-sm { padding: var(--space-sm); }
+.p-md { padding: var(--space-md); }
+.p-lg { padding: var(--space-lg); }
+.p-xl { padding: var(--space-xl); }
+.m-sm { margin: var(--space-sm); }
+.m-md { margin: var(--space-md); }
+.m-lg { margin: var(--space-lg); }
+.m-xl { margin: var(--space-xl); }
+.mt-sm { margin-top: var(--space-sm); }
+.mt-md { margin-top: var(--space-md); }
+.mt-lg { margin-top: var(--space-lg); }
+.mb-sm { margin-bottom: var(--space-sm); }
+.mb-md { margin-bottom: var(--space-md); }
+.mb-lg { margin-bottom: var(--space-lg); }
+
+/* Width */
+.w-full { width: 100%; }
+.max-w-sm { max-width: 384px; }
+.max-w-md { max-width: 448px; }
+.max-w-lg { max-width: 512px; }
+.max-w-xl { max-width: 576px; }
+
+/* Text */
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-sm { font-size: 0.875rem; }
+.text-lg { font-size: 1.125rem; }
+.text-xl { font-size: 1.25rem; }
+.text-2xl { font-size: 1.5rem; }
+.text-3xl { font-size: 1.875rem; }
+.text-4xl { font-size: 2.25rem; }
+.font-medium { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.font-bold { font-weight: 700; }
+
+/* ===== Animations ===== */
+
+/* Number Scroll Animation */
+@keyframes numberScroll {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.number-scroll {
+  animation: numberScroll 0.5s ease-out;
+}
+
+/* Floating Animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Spin Animation */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Backdrop Blur */
+.backdrop-blur {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.backdrop-blur-lg {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-base);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(163, 177, 198, 0.6);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(163, 177, 198, 0.8);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  :root {
+    --radius-container: 24px;
+    --radius-button: 12px;
+  }
+  
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.25rem; }
+  
+  .neu-card {
+    padding: var(--space-md);
+  }
+}
